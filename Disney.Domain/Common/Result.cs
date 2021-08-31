@@ -24,7 +24,7 @@ namespace Disney.Domain.Common
             {
                 HasErrors = true,
                 Messages = new List<string>()
-            { "No se Encontró un Registro con los Datos Enviados" }
+            { "No se ha encontrado un registro con los datos proporcionados." }
             };
     }
 }
