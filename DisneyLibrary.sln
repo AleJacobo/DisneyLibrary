@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisneyLibrary", "DisneyLibrary\DisneyLibrary.csproj", "{593048B4-7E3A-40EF-A9BA-E3C47F2AD6FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disney.API", "DisneyLibrary\Disney.API.csproj", "{593048B4-7E3A-40EF-A9BA-E3C47F2AD6FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disney.Application", "Disney.Application\Disney.Application.csproj", "{F46C9D88-ED73-4379-8370-8F88D25B4528}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disney.Domain", "Disney.Domain\Disney.Domain.csproj", "{784D7E52-B46F-41E8-A517-A71DEAF1D7F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disney.Infrastructure", "Disney.Infrastructure\Disney.Infrastructure.csproj", "{6EB4651C-953B-421E-AF25-2731BA75DE59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{593048B4-7E3A-40EF-A9BA-E3C47F2AD6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{593048B4-7E3A-40EF-A9BA-E3C47F2AD6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{593048B4-7E3A-40EF-A9BA-E3C47F2AD6FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F46C9D88-ED73-4379-8370-8F88D25B4528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F46C9D88-ED73-4379-8370-8F88D25B4528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F46C9D88-ED73-4379-8370-8F88D25B4528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F46C9D88-ED73-4379-8370-8F88D25B4528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{784D7E52-B46F-41E8-A517-A71DEAF1D7F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{784D7E52-B46F-41E8-A517-A71DEAF1D7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{784D7E52-B46F-41E8-A517-A71DEAF1D7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{784D7E52-B46F-41E8-A517-A71DEAF1D7F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB4651C-953B-421E-AF25-2731BA75DE59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB4651C-953B-421E-AF25-2731BA75DE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB4651C-953B-421E-AF25-2731BA75DE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB4651C-953B-421E-AF25-2731BA75DE59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
