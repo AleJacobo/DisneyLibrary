@@ -14,7 +14,7 @@ namespace Disney.Domain.Entities
         [Required(ErrorMessage = "Ingrese una imagen valida")]
         [Url]
         [Column(TypeName = "VARCHAR")]
-        public string URLImage { get; set; }
+        public string urlImage { get; set; }
 
         [Required(ErrorMessage = "Nombre de la pelicula/serie requerido")]
         [Column(TypeName = "VARCHAR (500)")]
