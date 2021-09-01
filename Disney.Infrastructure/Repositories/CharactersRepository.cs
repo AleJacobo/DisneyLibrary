@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
 {
-    public class CharactersRepository : IBaseRepository<Character>
+    public class CharactersRepository : IBaseRepository<Genres>
     {
         #region DataContext and Constructor
         private readonly DataContext context;
@@ -18,16 +18,16 @@ namespace Disney.Infrastructure.Repositories
             => this.context = context;
         #endregion
 
-        public async Task<IQueryable<Character>> GetAll()
+        public async Task<IQueryable<Genres>> GetAll()
         {
             var response = await context.Characters
                 .Where(x => x.Status == true)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
 
-            return (IQueryable<Character>)response;
+            return (IQueryable<Genres>)response;
         }
-        public async Task<Character> GetbyId(int id)
+        public async Task<Genres> GetbyId(int id)
         {
             var response = context.Characters
                 .Where(x => x.ID == id)
@@ -35,15 +35,15 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-        public async Task<IQueryable<Character>> GetbyAge(int age)
+        public async Task<IQueryable<Genres>> GetbyAge(int age)
         {
             var response =  await context.Characters
                 .Where(x => x.Status == true && x.Age == age)
                 .ToListAsync();
 
-            return (IQueryable<Character>)response;
+            return (IQueryable<Genres>)response;
         }
-        public Character GetbyName(string name)
+        public Genres GetbyName(string name)
         {
             var response = context.Characters
                 .Where(x => x.Name.Contains(name) && x.Status == true)
@@ -51,7 +51,7 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-        public async Task<IQueryable<Character>> GetbyMovieSerie(MovieSerieDTO movieSerieDTO)
+        public async Task<IQueryable<Genres>> GetbyMovieSerie(MovieSerieDTO movieSerieDTO)
         {
             var response = await context.MoviesSeries
                 .Where(x => x.Name == movieSerieDTO.Name)
@@ -59,19 +59,19 @@ namespace Disney.Infrastructure.Repositories
                              .OrderBy(x => x.associatedCharacter.Name)
                              .ToListAsync();
 
-            return (IQueryable<Character>)response;
+            return (IQueryable<Genres>)response;
         }
-        public async Task Create(Character entity)
+        public async Task Create(Genres entity)
         {
             await context.Characters.AddAsync(entity);
             await context.SaveChangesAsync();
         }
-        public async Task Update(Character entity)
+        public async Task Update(Genres entity)
         {
             context.Characters.Update(entity);
             await context.SaveChangesAsync();
         }
-        public bool CharacterExists(Character entity)
+        public bool CharacterExists(Genres entity)
         {
             bool response = true;
 

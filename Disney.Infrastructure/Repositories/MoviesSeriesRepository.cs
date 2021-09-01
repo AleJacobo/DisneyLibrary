@@ -43,7 +43,7 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-        public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
+        public async Task<IQueryable<Genres>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
         {
             var response = await context.MoviesSeries
                 .Where(x => x.Name == movieSerieDTO.Name)
@@ -51,7 +51,7 @@ namespace Disney.Infrastructure.Repositories
                             .OrderBy(x => x.associatedCharacter.Name)
                             .ToListAsync();
 
-            return (IQueryable<Character>)response;
+            return (IQueryable<Genres>)response;
         }
         public async Task Create(MovieSerie entity)
         {

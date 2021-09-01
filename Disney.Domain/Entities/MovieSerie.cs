@@ -27,7 +27,7 @@ namespace Disney.Domain.Entities
         [Required(ErrorMessage = "Puntuacion requerida")]
         [Column(TypeName = "ENUM(1, 2, 3, 4, 5)")]
         public eRating Rating { get; set; }
-        public virtual Character associatedCharacter { get; set; }
+        public virtual Genres associatedCharacter { get; set; }
         public bool Status { get; set; }
 
     }
