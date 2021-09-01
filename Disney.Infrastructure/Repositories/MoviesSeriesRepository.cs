@@ -43,16 +43,6 @@ namespace Disney.Infrastructure.Repositories
 
             return result;
         }
-        public async Task<IQueryable<MovieSerie>> GetbyGenre(GenreDTO genreDTO)
-        {
-            var result = await context.Genres
-               .Where(x => x.Name == genreDTO.Name)
-               .Include(x => x.associatedMovieSerie)
-                            .OrderByDescending(x => x.associatedMovieSerie.ReleaseDate)
-                            .ToListAsync();
-
-            return (IQueryable<MovieSerie>)result;
-        }
         public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
         {
             var result = await context.MoviesSeries
