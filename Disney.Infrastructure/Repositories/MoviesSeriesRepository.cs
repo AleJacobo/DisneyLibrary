@@ -20,38 +20,38 @@ namespace Disney.Infrastructure.Repositories
 
         public async Task<IEnumerable<MovieSerie>> GetAll()
         {
-            var result = await context.MoviesSeries
+            var response = await context.MoviesSeries
                  .Where(x => x.Status == true)
                  .OrderBy(x => x.Name)
                  .ToListAsync();
 
-            return (IQueryable<MovieSerie>)result;
+            return (IQueryable<MovieSerie>)response;
         }
         public async Task<MovieSerie> GetbyId(int id)
         {
-            var result = context.MoviesSeries
+            var response = context.MoviesSeries
                 .Where(x => x.ID == id && x.Status == true)
                 .FirstOrDefault();
 
-            return result;
+            return response;
         }
         public MovieSerie GetbyName(string name)
         {
-            var result = context.MoviesSeries
+            var response = context.MoviesSeries
                 .Where(x => x.Name.Contains(name) && x.Status == true)
                 .FirstOrDefault();
 
-            return result;
+            return response;
         }
         public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
         {
-            var result = await context.MoviesSeries
+            var response = await context.MoviesSeries
                 .Where(x => x.Name == movieSerieDTO.Name)
                 .Include(x => x.associatedCharacter)
                             .OrderBy(x => x.associatedCharacter.Name)
                             .ToListAsync();
 
-            return (IQueryable<Character>)result;
+            return (IQueryable<Character>)response;
         }
         public async Task Create(MovieSerie entity)
         {
@@ -65,7 +65,7 @@ namespace Disney.Infrastructure.Repositories
         }
         public bool MovieSerieExists(MovieSerie entity)
         {
-            bool result = true;
+            bool response = true;
 
             var search = context.MoviesSeries
                 .Where(x => x.ID == entity.ID)
@@ -73,10 +73,10 @@ namespace Disney.Infrastructure.Repositories
 
             if (search == null)
             {
-                result = false;
+                response = false;
             }
 
-            return result;
+            return response;
         }
     }
 }

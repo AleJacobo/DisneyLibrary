@@ -20,46 +20,46 @@ namespace Disney.Infrastructure.Repositories
 
         public async Task<IEnumerable<Character>> GetAll()
         {
-            var result = await context.Characters
+            var response = await context.Characters
                 .Where(x => x.Status == true)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
 
-            return (IQueryable<Character>)result;
+            return (IQueryable<Character>)response;
         }
         public async Task<Character> GetbyId(int id)
         {
-            var result = context.Characters
+            var response = context.Characters
                 .Where(x => x.ID == id)
                 .FirstOrDefault();
 
-            return result;
+            return response;
         }
         public IQueryable<Character> GetbyAge(int age)
         {
-            var result = context.Characters
+            var response = context.Characters
                 .Where(x => x.Status == true && x.Age == age)
                 .ToList();
 
-            return (IQueryable<Character>)result;
+            return (IQueryable<Character>)response;
         }
         public Character GetbyName(string name)
         {
-            var result = context.Characters
+            var response = context.Characters
                 .Where(x => x.Name.Contains(name) && x.Status == true)
                 .FirstOrDefault();
 
-            return result;
+            return response;
         }
         public async Task<IQueryable<Character>> GetbyMovieSerie(MovieSerieDTO movieSerieDTO)
         {
-            var result = await context.MoviesSeries
+            var response = await context.MoviesSeries
                 .Where(x => x.Name == movieSerieDTO.Name)
                 .Include(x => x.associatedCharacter)
                              .OrderBy(x => x.associatedCharacter.Name)
                              .ToListAsync();
 
-            return (IQueryable<Character>)result;
+            return (IQueryable<Character>)response;
         }
         public async Task Create(Character entity)
         {
@@ -73,7 +73,7 @@ namespace Disney.Infrastructure.Repositories
         }
         public bool CharacterExists(Character entity)
         {
-            bool result = true;
+            bool response = true;
 
             var search = context.Characters
                 .Where(x => x.ID == entity.ID)
@@ -81,10 +81,10 @@ namespace Disney.Infrastructure.Repositories
 
             if (search == null)
             {
-                result = false;
+                response = false;
             }
 
-            return result;
+            return response;
         }
     }
 }

@@ -20,39 +20,38 @@ namespace Disney.Infrastructure.Repositories
 
         public async Task<IEnumerable<Genre>> GetAll()
         {
-            var result = await context.Genres
+            var response = await context.Genres
                  .Where(x => x.Status == true)
                  .OrderBy(x => x.Name)
                  .ToListAsync();
 
-            return (IQueryable<Genre>)result;
+            return (IQueryable<Genre>)response;
         }
         public async Task<Genre> GetbyId(int id)
         {
-            var result = context.Genres
+            var response = context.Genres
                 .Where(x => x.ID == id)
                 .FirstOrDefault();
 
-            return result;
+            return response;
         }
         public async Task<IQueryable<MovieSerie>> GetMoviesSeriesbyGenre(GenreDTO genreDTO)
         {
-            var result = await context.Genres
+            var response = await context.Genres
                .Where(x => x.Name == genreDTO.Name)
                .Include(x => x.associatedMovieSerie)
                             .OrderByDescending(x => x.associatedMovieSerie.ReleaseDate)
                             .ToListAsync();
 
-            return (IQueryable<MovieSerie>)result;
+            return (IQueryable<MovieSerie>)response;
         }
-
         public Genre GetbyName(string name)
         {
-            var result = context.Genres
+            var reponse = context.Genres
                 .Where(x => x.Name.Contains(name) && x.Status == true)
                 .FirstOrDefault();
 
-            return result;
+            return reponse;
         }
         public async Task Create(Genre entity)
         {
@@ -66,7 +65,7 @@ namespace Disney.Infrastructure.Repositories
         }
         public bool GenreExists(Genre entity)
         {
-            bool result = true;
+            bool response = true;
 
             var search = context.Genres
                 .Where(x => x.ID == entity.ID)
@@ -74,10 +73,10 @@ namespace Disney.Infrastructure.Repositories
 
             if (search == null)
             {
-                result = false;
+                response = false;
             }
 
-            return result;
+            return response;
         }
 
 
