@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Disney.Application.Interfaces
 {
-    public interface IBaseServices
+    public interface IMoviesSeriesServices
     {
 
     }
