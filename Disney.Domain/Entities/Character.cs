@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Disney.Domain.Entities
 {
-    public class Genres : EntityBase
+    public class Character : EntityBase
     {
         [Required(ErrorMessage = "Ingrese una imagen")]
         [Url]
