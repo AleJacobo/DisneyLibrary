@@ -28,6 +28,7 @@ namespace Disney.Domain.Entities
         [Column(TypeName = "ENUM(1, 2, 3, 4, 5)")]
         public eRating Rating { get; set; }
         public virtual Character associatedCharacter { get; set; }
+        public virtual Genre associatedGenre { get; set; }
         public bool Status { get; set; }
 
     }

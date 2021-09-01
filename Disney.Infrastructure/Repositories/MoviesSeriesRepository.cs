@@ -1,7 +1,9 @@
-﻿using Disney.Domain.Entities;
+﻿using Disney.Domain.DTOs;
+using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,26 +18,75 @@ namespace Disney.Infrastructure.Repositories
             => this.context = context;
         #endregion
 
-        public Task<IEnumerable<MovieSerie>> GetAll()
+        public async Task<IEnumerable<MovieSerie>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await context.MoviesSeries
+                 .Where(x => x.Status == true)
+                 .OrderBy(x => x.Name)
+                 .ToListAsync();
+
+            return (IQueryable<MovieSerie>)result;
         }
-        public Task<MovieSerie> GetbyId(int id)
+        public async Task<MovieSerie> GetbyId(int id)
         {
-            throw new NotImplementedException();
+            var result = context.MoviesSeries
+                .Where(x => x.ID == id && x.Status == true)
+                .FirstOrDefault();
+
+            return result;
         }
         public MovieSerie GetbyName(string name)
         {
-            throw new NotImplementedException();
-        }
-        public Task Create(MovieSerie entity)
-        {
-            throw new NotImplementedException();
-        }
-        public Task Update(MovieSerie entity)
-        {
-            throw new NotImplementedException();
-        }
+            var result = context.MoviesSeries
+                .Where(x => x.Name.Contains(name) && x.Status == true)
+                .FirstOrDefault();
 
+            return result;
+        }
+        public async Task<IQueryable<MovieSerie>> GetbyGenre(GenreDTO genreDTO)
+        {
+            var result = await context.Genres
+               .Where(x => x.Name == genreDTO.Name)
+               .Include(x => x.associatedMovieSerie)
+                            .OrderByDescending(x => x.associatedMovieSerie.ReleaseDate)
+                            .ToListAsync();
+
+            return (IQueryable<MovieSerie>)result;
+        }
+        public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
+        {
+            var result = await context.MoviesSeries
+                .Where(x => x.Name == movieSerieDTO.Name)
+                .Include(x => x.associatedCharacter)
+                            .OrderBy(x => x.associatedCharacter.Name)
+                            .ToListAsync();
+
+            return (IQueryable<Character>)result;
+        }
+        public async Task Create(MovieSerie entity)
+        {
+            await context.MoviesSeries.AddAsync(entity);
+            await context.SaveChangesAsync();
+        }
+        public async Task Update(MovieSerie entity)
+        {
+            context.MoviesSeries.Update(entity);
+            await context.SaveChangesAsync();
+        }
+        public bool MovieSerieExists(MovieSerie entity)
+        {
+            bool result = true;
+
+            var search = context.MoviesSeries
+                .Where(x => x.ID == entity.ID)
+                .FirstOrDefault();
+
+            if (search == null)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }
