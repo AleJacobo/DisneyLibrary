@@ -24,12 +24,12 @@ namespace Disney.Infrastructure.Repositories
                 .OrderBy(x => x.UserName)
                 .ToListAsync();
 
-            return(IQueryable<User>)response;
+            return (IQueryable<User>)response;
         }
         public async Task<User> GetbyId(int id)
         {
             var response = context.Users
-                .Where(x => x.ID == id && x.Status==true)
+                .Where(x => x.ID == id && x.Status == true)
                 .FirstOrDefault();
 
             return response;
@@ -51,6 +51,23 @@ namespace Disney.Infrastructure.Repositories
         {
             context.Users.Update(entity);
             await context.SaveChangesAsync();
+        }
+        public bool Exists(User entity)
+        {
+            bool response = false;
+
+            var search = context.Users
+                .Where(x => x.Email.Contains(entity.Email)
+                         || x.UserName.Contains(entity.UserName)
+                         && x.Status == true)
+                .FirstOrDefault();
+
+            if (search == null)
+            {
+                response = true;
+            }
+
+            return response;
         }
 
     }

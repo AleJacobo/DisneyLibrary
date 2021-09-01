@@ -27,6 +27,14 @@ namespace Disney.Infrastructure.Repositories
 
             return (IQueryable<Character>)response;
         }
+        public Character GetbyName(string name)
+        {
+            var response = context.Characters
+                .Where(x => x.Name.Contains(name) && x.Status == true)
+                .FirstOrDefault();
+
+            return response;
+        }
         public async Task<Character> GetbyId(int id)
         {
             var response = context.Characters
@@ -42,14 +50,6 @@ namespace Disney.Infrastructure.Repositories
                 .ToListAsync();
 
             return (IQueryable<Character>)response;
-        }
-        public Character GetbyName(string name)
-        {
-            var response = context.Characters
-                .Where(x => x.Name.Contains(name) && x.Status == true)
-                .FirstOrDefault();
-
-            return response;
         }
         public async Task<IQueryable<Character>> GetbyMovieSerie(MovieSerieDTO movieSerieDTO)
         {
@@ -71,20 +71,21 @@ namespace Disney.Infrastructure.Repositories
             context.Characters.Update(entity);
             await context.SaveChangesAsync();
         }
-        public bool CharacterExists(Character entity)
+        public bool Exists(Character entity)
         {
-            bool response = true;
+            bool response = false;
 
             var search = context.Characters
-                .Where(x => x.ID == entity.ID)
+                .Where(x => x.Name.Contains(entity.Name) && x.Status == true)
                 .FirstOrDefault();
 
             if (search == null)
             {
-                response = false;
+                response = true;
             }
 
             return response;
         }
+
     }
 }

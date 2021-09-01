@@ -63,17 +63,17 @@ namespace Disney.Infrastructure.Repositories
             context.Genres.Update(entity);
             await context.SaveChangesAsync();
         }
-        public bool GenreExists(Genre entity)
+        public bool Exists(Genre entity)
         {
-            bool response = true;
+            bool response = false;
 
             var search = context.Genres
-                .Where(x => x.ID == entity.ID)
+                .Where(x => x.Name.Contains(entity.Name) && x.Status == true)
                 .FirstOrDefault();
 
             if (search == null)
             {
-                response = false;
+                response = true;
             }
 
             return response;

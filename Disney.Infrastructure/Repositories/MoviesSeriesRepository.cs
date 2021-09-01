@@ -43,7 +43,7 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-        public async Task<IQueryable<Genres>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
+        public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
         {
             var response = await context.MoviesSeries
                 .Where(x => x.Name == movieSerieDTO.Name)
@@ -51,7 +51,7 @@ namespace Disney.Infrastructure.Repositories
                             .OrderBy(x => x.associatedCharacter.Name)
                             .ToListAsync();
 
-            return (IQueryable<Genres>)response;
+            return (IQueryable<Character>)response;
         }
         public async Task Create(MovieSerie entity)
         {
@@ -63,17 +63,17 @@ namespace Disney.Infrastructure.Repositories
             context.MoviesSeries.Update(entity);
             await context.SaveChangesAsync();
         }
-        public bool MovieSerieExists(MovieSerie entity)
+        public bool Exists(MovieSerie entity)
         {
-            bool response = true;
+            bool response = false;
 
             var search = context.MoviesSeries
-                .Where(x => x.ID == entity.ID)
+                .Where(x => x.Name.Contains(entity.Name) && x.Status == true)
                 .FirstOrDefault();
 
             if (search == null)
             {
-                response = false;
+                response = true;
             }
 
             return response;
