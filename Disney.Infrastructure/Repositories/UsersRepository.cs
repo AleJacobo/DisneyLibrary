@@ -2,6 +2,7 @@
 using Disney.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,25 +17,40 @@ namespace Disney.Infrastructure.Repositories
             => this.context = context;
         #endregion
 
-        public Task<IEnumerable<User>> GetAll()
+        public async Task<IQueryable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            var response = await context.Users
+                .Where(x => x.Status == true)
+                .OrderBy(x => x.UserName)
+                .ToListAsync();
+
+            return(IQueryable<User>)response;
         }
-        public Task<User> GetbyId(int id)
+        public async Task<User> GetbyId(int id)
         {
-            throw new NotImplementedException();
+            var response = context.Users
+                .Where(x => x.ID == id && x.Status==true)
+                .FirstOrDefault();
+
+            return response;
         }
         public User GetbyName(string name)
         {
-            throw new NotImplementedException();
+            var response = context.Users
+                .Where(x => x.UserName.Contains(name) && x.Status == true)
+                .FirstOrDefault();
+
+            return response;
         }
-        public Task Create(User entity)
+        public async Task Create(User entity)
         {
-            throw new NotImplementedException();
+            await context.Users.AddAsync(entity);
+            await context.SaveChangesAsync();
         }
-        public Task Update(User entity)
+        public async Task Update(User entity)
         {
-            throw new NotImplementedException();
+            context.Users.Update(entity);
+            await context.SaveChangesAsync();
         }
 
     }

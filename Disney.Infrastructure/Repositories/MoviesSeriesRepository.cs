@@ -18,7 +18,7 @@ namespace Disney.Infrastructure.Repositories
             => this.context = context;
         #endregion
 
-        public async Task<IEnumerable<MovieSerie>> GetAll()
+        public async Task<IQueryable<MovieSerie>> GetAll()
         {
             var response = await context.MoviesSeries
                  .Where(x => x.Status == true)

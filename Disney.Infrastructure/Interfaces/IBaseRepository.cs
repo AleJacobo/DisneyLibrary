@@ -8,7 +8,7 @@ namespace Disney.Infrastructure.Interfaces
 {
     public interface IBaseRepository<T> where T : class 
     {
-        Task<IEnumerable<T>> GetAll();
+        Task<IQueryable<T>> GetAll();
         Task<T> GetbyId(int id);
         Task Create(T entity);
         Task Update(T entity);

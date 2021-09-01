@@ -18,7 +18,7 @@ namespace Disney.Infrastructure.Repositories
             this.context = context;
         #endregion
 
-        public async Task<IEnumerable<Genre>> GetAll()
+        public async Task<IQueryable<Genre>> GetAll()
         {
             var response = await context.Genres
                  .Where(x => x.Status == true)

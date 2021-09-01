@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Disney.Domain.DTOs
 {
-    class UserDTO
+    public class UserDTO
     {
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool Status { get; set; }
+
     }
 }

@@ -18,7 +18,7 @@ namespace Disney.Infrastructure.Repositories
             => this.context = context;
         #endregion
 
-        public async Task<IEnumerable<Character>> GetAll()
+        public async Task<IQueryable<Character>> GetAll()
         {
             var response = await context.Characters
                 .Where(x => x.Status == true)
@@ -35,11 +35,11 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-        public IQueryable<Character> GetbyAge(int age)
+        public async Task<IQueryable<Character>> GetbyAge(int age)
         {
-            var response = context.Characters
+            var response =  await context.Characters
                 .Where(x => x.Status == true && x.Age == age)
-                .ToList();
+                .ToListAsync();
 
             return (IQueryable<Character>)response;
         }
