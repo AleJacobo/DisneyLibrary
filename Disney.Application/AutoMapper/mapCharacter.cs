@@ -12,9 +12,6 @@ namespace Disney.Application.AutoMapper
     public class mapCharacter : Profile
     {
         public mapCharacter()
-        {
-            CreateMap<Character, CharacterDTO>
-        }
-
+            =>CreateMap<Character, CharacterDTO>().ReverseMap(); 
     }
 }
