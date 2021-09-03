@@ -44,9 +44,9 @@ namespace Disney.API.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult<IEnumerable<GenreDTO>> GetMovieSerieByGenre([FromQuery] GenreDTO genreDTO)
+        public ActionResult<IEnumerable<GenreDTO>> GetMovieSerieByGenre([FromQuery] MovieSerieDTO movieSerieDTO)
         {
-            var response = moviesSeriesServices.GetMovieSerieByGenre(genreDTO);
+            var response = moviesSeriesServices.GetMovieSerieByGenre(movieSerieDTO);
 
             return Ok(response);
         }
