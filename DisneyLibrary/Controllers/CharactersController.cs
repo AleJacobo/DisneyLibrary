@@ -18,10 +18,10 @@ namespace Disney.API.Controllers
     public class CharactersController : ControllerBase
     {
         #region Objects and Constructor
-        private readonly ICharactersService charactersService;
-        public CharactersController(ICharactersService charactersService)
+        private readonly ICharactersServices charactersServices;
+        public CharactersController(ICharactersServices charactersServices)
         {
-            this.charactersService = charactersService;
+            this.charactersServices = charactersServices;
         }
         #endregion
 
@@ -29,7 +29,7 @@ namespace Disney.API.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<CharacterDTO>>> GetAllCharacters()
         {
-            var response = charactersService.GetAllCharacters();
+            var response = charactersServices.GetAllCharacters();
 
             return Ok(await response);
         }
@@ -38,7 +38,7 @@ namespace Disney.API.Controllers
         [Authorize]
         public ActionResult<CharacterDTO> GetCharacterByName([FromQuery] string name)
         {
-            var response = charactersService.GetCharacterByName(name);
+            var response = charactersServices.GetCharacterByName(name);
 
             return Ok(response);
         }
@@ -47,7 +47,7 @@ namespace Disney.API.Controllers
         [Authorize]
         public ActionResult<CharacterDTO> GetCharacterByAge([FromQuery] int age)
         {
-            var response = charactersService.GetCharactersByAge(age);
+            var response = charactersServices.GetCharactersByAge(age);
             return Ok(response);
         }
 
@@ -55,7 +55,7 @@ namespace Disney.API.Controllers
         [Authorize]
         public ActionResult<MovieSerieDTO> GetCharacterByMovieSerie([FromQuery] MovieSerieDTO movieSerieDTO)
         {
-            var response = charactersService.GetCharacterByMovieSerie(movieSerieDTO);
+            var response = charactersServices.GetCharacterByMovieSerie(movieSerieDTO);
 
             return Ok(response);
         }
@@ -64,7 +64,7 @@ namespace Disney.API.Controllers
         [Authorize]
         public ActionResult<Result> CreateCharacter([FromBody] CharacterDTO characterDTO)
         {
-            var response = charactersService.CreateCharacter(characterDTO);
+            var response = charactersServices.CreateCharacter(characterDTO);
 
             return response.HasErrors
                 ? BadRequest(response.Messages)
@@ -76,7 +76,7 @@ namespace Disney.API.Controllers
 
         public ActionResult<Result> UpdateCharacter([FromBody] CharacterDTO characterDTO)
         {
-            var response = charactersService.UpdateCharacter(characterDTO);
+            var response = charactersServices.UpdateCharacter(characterDTO);
 
             return response.HasErrors
                 ? BadRequest(response.Messages)
@@ -88,7 +88,7 @@ namespace Disney.API.Controllers
 
         public ActionResult<Result> DeleteCharacter([FromRoute] CharacterDTO characterDTO)
         {
-            var response = charactersService.DeleteCharacter(characterDTO);
+            var response = charactersServices.DeleteCharacter(characterDTO);
 
             return response.HasErrors
                 ? BadRequest(response.Messages)

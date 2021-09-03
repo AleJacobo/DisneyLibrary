@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Disney.Application.Interfaces
 {
-    public interface ICharactersService
+    public interface ICharactersServices
     {
         Task<IEnumerable<CharacterDTO>> GetAllCharacters();
         CharacterDTO GetCharacterByName(string name);
