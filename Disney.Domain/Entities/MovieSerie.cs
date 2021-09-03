@@ -14,7 +14,7 @@ namespace Disney.Domain.Entities
         [Required(ErrorMessage = "Ingrese una imagen valida")]
         [Url]
         [Column(TypeName = "VARCHAR")]
-        public string URLImage { get; set; }
+        public string urlImage { get; set; }
 
         [Required(ErrorMessage = "Nombre de la pelicula/serie requerido")]
         [Column(TypeName = "VARCHAR (500)")]
@@ -28,6 +28,7 @@ namespace Disney.Domain.Entities
         [Column(TypeName = "ENUM(1, 2, 3, 4, 5)")]
         public eRating Rating { get; set; }
         public virtual Character associatedCharacter { get; set; }
+        public virtual Genre associatedGenre { get; set; }
         public bool Status { get; set; }
 
     }
