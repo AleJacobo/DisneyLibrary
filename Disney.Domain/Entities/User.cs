@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Disney.Domain.Entities
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser
     {
         [Required(ErrorMessage = "Nombre de usuario es necesario")]
         [StringLength(20, ErrorMessage = "Debe contener minimo 8 caracteres", MinimumLength = 8)]
@@ -21,6 +21,8 @@ namespace Disney.Domain.Entities
         [StringLength(255, ErrorMessage = "Debe de tener minimo 8 caracteres", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public int Id { get; set; }
         public bool Status { get; set; }
     }
 }

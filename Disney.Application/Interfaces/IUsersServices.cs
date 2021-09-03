@@ -1,4 +1,7 @@
-﻿using Disney.Domain.DTOs;
+﻿using Disney.Application.AuthCommands;
+using Disney.Application.Authentication;
+using Disney.Domain.Common;
+using Disney.Domain.DTOs;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections.Generic;
@@ -11,8 +14,8 @@ namespace Disney.Application.Interfaces
     public interface IUsersServices
     {
         Task<IEnumerable<UserDTO>> GetAllUsers();
-        Task<AuthenticationResult> LoginUser(LoginUser request);
-        Task<AuthenticationResult> RegisterUser(RegisterUser request);
+        Task<AuthResult> LoginUser(LoginUser request);
+        Task<AuthResult> RegisterUser(RegisterUser request);
         Task<Result> DeleteUser(DeleteUser request);
     }
 }
