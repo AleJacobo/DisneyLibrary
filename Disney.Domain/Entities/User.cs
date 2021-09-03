@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Disney.Domain.Entities
 {
-    public class User : EntityBase
+    public class User : IdentityUser<int>
     {
         [Required(ErrorMessage = "Nombre de usuario es necesario")]
         [StringLength(20, ErrorMessage = "Debe contener minimo 8 caracteres", MinimumLength = 8)]
@@ -21,7 +22,5 @@ namespace Disney.Domain.Entities
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public bool Status { get; set; }
-
-
     }
 }

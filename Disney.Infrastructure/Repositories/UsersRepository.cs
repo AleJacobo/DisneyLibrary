@@ -29,7 +29,7 @@ namespace Disney.Infrastructure.Repositories
         public async Task<User> GetbyId(int id)
         {
             var response = context.Users
-                .Where(x => x.ID == id && x.Status == true)
+                .Where(x => x.Id == id && x.Status == true)
                 .FirstOrDefault();
 
             return response;
