@@ -50,7 +50,7 @@ namespace Disney.Application.Services
         public Result CreateMovieSerie(MovieSerieDTO movieSerieDTO)
         {
             var entity = mapper.Map<MovieSerie>(movieSerieDTO);
-            bool confirmation = baseRepository.Exists(entity);
+            bool confirmation = moviesSeriesRepository.Exists(entity);
 
             if (confirmation == true)
                 return new Result().Fail($"Ya existe un registro previo de dicha pelicula o serie");
@@ -61,7 +61,7 @@ namespace Disney.Application.Services
         public Result UpdateMovieSerie(MovieSerieDTO movieSerieDTO)
         {
             var entity = mapper.Map<MovieSerie>(movieSerieDTO);
-            var confirmation = baseRepository.Exists(entity);
+            bool confirmation = moviesSeriesRepository.Exists(entity);
 
             if (confirmation == false)
                 return new Result().NotFound();
@@ -72,7 +72,7 @@ namespace Disney.Application.Services
         public Result DeleteMovieSerie(MovieSerieDTO movieSerieDTO)
         {
             var entity = mapper.Map<MovieSerie>(movieSerieDTO);
-            var confirmation = baseRepository.Exists(entity);
+            bool confirmation = moviesSeriesRepository.Exists(entity);
 
             if (confirmation == false)
                 return new Result().NotFound();

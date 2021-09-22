@@ -43,7 +43,7 @@ namespace Disney.Application.Services
         public Result CreateGenre(GenreDTO genreDTO)
         {
             var entity = mapper.Map<Genre>(genreDTO);
-            bool confirmation = baseRepository.Exists(entity);
+            bool confirmation = genreRepository.Exists(entity);
 
             if (confirmation == true)
                 return new Result().Fail($"Ya existe un registro previo de dicho genero");
@@ -54,7 +54,8 @@ namespace Disney.Application.Services
         public Result UpdateGenre(GenreDTO genreDTO)
         {
             var entity = mapper.Map<Genre>(genreDTO);
-            var confirmation = baseRepository.Exists(entity);
+            bool confirmation = genreRepository.Exists(entity);
+
 
             if (confirmation == false)
                 return new Result().NotFound();
@@ -65,7 +66,7 @@ namespace Disney.Application.Services
         public Result DeleteGenre(GenreDTO genreDTO)
         {
             var entity = mapper.Map<Genre>(genreDTO);
-            var confirmation = baseRepository.Exists(entity);
+            bool confirmation = genreRepository.Exists(entity);
 
             if (confirmation == false)
                 return new Result().NotFound();

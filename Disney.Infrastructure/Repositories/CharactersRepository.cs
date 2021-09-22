@@ -32,7 +32,7 @@ namespace Disney.Infrastructure.Repositories
 
             return (IQueryable<Character>)response;
         }
-        
+
         public bool Exists(Character entity)
         {
             bool response = false;

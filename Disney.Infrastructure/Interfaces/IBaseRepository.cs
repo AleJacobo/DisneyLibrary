@@ -10,6 +10,6 @@ namespace Disney.Infrastructure.Interfaces
         Task Create(T entity);
         Task Update(T entity);
         T GetbyName(string name);
-        
+
     }
 }
