@@ -7,39 +7,13 @@ using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
 {
-    public class CharactersRepository : IBaseRepository<Character>
+    public class CharactersRepository : BaseRepository<Character>, IBaseRepository<Character>
     {
-        #region DataContext and Constructor
+        #region Context and Constructor
         private readonly DataContext context;
-        public CharactersRepository(DataContext context)
-            => this.context = context;
+        public CharactersRepository(DataContext context) : base(context) { }
         #endregion
 
-        public async Task<IQueryable<Character>> GetAll()
-        {
-            var response = await context.Characters
-                .Where(x => x.Status == true)
-                .OrderBy(x => x.Name)
-                .ToListAsync();
-
-            return (IQueryable<Character>)response;
-        }
-        public Character GetbyName(string name)
-        {
-            var response = context.Characters
-                .Where(x => x.Name.Contains(name) && x.Status == true)
-                .FirstOrDefault();
-
-            return response;
-        }
-        public async Task<Character> GetbyId(int id)
-        {
-            var response = context.Characters
-                .Where(x => x.ID == id)
-                .FirstOrDefault();
-
-            return response;
-        }
         public async Task<IQueryable<Character>> GetbyAge(int age)
         {
             var response = await context.Characters
@@ -58,16 +32,7 @@ namespace Disney.Infrastructure.Repositories
 
             return (IQueryable<Character>)response;
         }
-        public async Task Create(Character entity)
-        {
-            await context.Characters.AddAsync(entity);
-            await context.SaveChangesAsync();
-        }
-        public async Task Update(Character entity)
-        {
-            context.Characters.Update(entity);
-            await context.SaveChangesAsync();
-        }
+        
         public bool Exists(Character entity)
         {
             bool response = false;
