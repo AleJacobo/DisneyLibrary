@@ -1,11 +1,8 @@
 ﻿using Disney.Domain.DTOs;
 using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
@@ -14,7 +11,7 @@ namespace Disney.Infrastructure.Repositories
     {
         #region DataContext and Constructor
         private readonly DataContext context;
-        public GenresRepository(DataContext context) => 
+        public GenresRepository(DataContext context) =>
             this.context = context;
         #endregion
 

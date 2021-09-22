@@ -1,11 +1,8 @@
 ﻿using Disney.Domain.DTOs;
 using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
@@ -46,7 +43,7 @@ namespace Disney.Infrastructure.Repositories
         public async Task<IQueryable<Character>> GetAssociatedCharacters(MovieSerieDTO movieSerieDTO)
         {
             var response = await context.MoviesSeries
-                .Where(x => x.Name == movieSerieDTO.Name && x.Status==true)
+                .Where(x => x.Name == movieSerieDTO.Name && x.Status == true)
                 .Include(x => x.associatedCharacter)
                             .OrderBy(x => x.associatedCharacter.Name)
                             .ToListAsync();
@@ -56,7 +53,7 @@ namespace Disney.Infrastructure.Repositories
         public async Task<IQueryable<MovieSerie>> GetMovieByGenre(MovieSerieDTO movieSerieDTO)
         {
             var response = await context.MoviesSeries
-                .Where(x => x.Name == movieSerieDTO.Name && x.Status==true)
+                .Where(x => x.Name == movieSerieDTO.Name && x.Status == true)
                 .Include(x => x.associatedGenre)
                             .OrderBy(x => x.associatedGenre.Name)
                             .ToListAsync();

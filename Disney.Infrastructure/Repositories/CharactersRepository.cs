@@ -1,11 +1,8 @@
 ﻿using Disney.Domain.DTOs;
 using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
@@ -45,7 +42,7 @@ namespace Disney.Infrastructure.Repositories
         }
         public async Task<IQueryable<Character>> GetbyAge(int age)
         {
-            var response =  await context.Characters
+            var response = await context.Characters
                 .Where(x => x.Status == true && x.Age == age)
                 .ToListAsync();
 

@@ -1,10 +1,7 @@
 ﻿using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories

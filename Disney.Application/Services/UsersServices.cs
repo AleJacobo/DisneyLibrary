@@ -133,7 +133,7 @@ namespace Disney.Application.Services
         public async Task<AuthResult> LoginUser(LoginUser request)
         {
             var user = await userManager.FindByEmailAsync(request.Email);
-            if (user==null)
+            if (user == null)
             {
                 return ValidateUserException(AuthValidationResponses.UserDoesNotExist);
             }
