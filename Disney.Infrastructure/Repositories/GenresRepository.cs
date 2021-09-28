@@ -1,40 +1,19 @@
 ﻿using Disney.Domain.DTOs;
 using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Infrastructure.Repositories
 {
-    public class GenresRepository : IBaseRepository<Genre>
+    public class GenresRepository : BaseRepository<Genre>, IBaseRepository<Genre>
     {
         #region DataContext and Constructor
         private readonly DataContext context;
-        public GenresRepository(DataContext context) => 
-            this.context = context;
+        public GenresRepository(DataContext context) : base(context) { }
         #endregion
 
-        public async Task<IQueryable<Genre>> GetAll()
-        {
-            var response = await context.Genres
-                 .Where(x => x.Status == true)
-                 .OrderBy(x => x.Name)
-                 .ToListAsync();
-
-            return (IQueryable<Genre>)response;
-        }
-        public async Task<Genre> GetbyId(int id)
-        {
-            var response = context.Genres
-                .Where(x => x.ID == id)
-                .FirstOrDefault();
-
-            return response;
-        }
         public async Task<IQueryable<MovieSerie>> GetMoviesSeriesbyGenre(GenreDTO genreDTO)
         {
             var response = await context.Genres
@@ -44,24 +23,6 @@ namespace Disney.Infrastructure.Repositories
                             .ToListAsync();
 
             return (IQueryable<MovieSerie>)response;
-        }
-        public Genre GetbyName(string name)
-        {
-            var reponse = context.Genres
-                .Where(x => x.Name.Contains(name) && x.Status == true)
-                .FirstOrDefault();
-
-            return reponse;
-        }
-        public async Task Create(Genre entity)
-        {
-            await context.Genres.AddAsync(entity);
-            await context.SaveChangesAsync();
-        }
-        public async Task Update(Genre entity)
-        {
-            context.Genres.Update(entity);
-            await context.SaveChangesAsync();
         }
         public bool Exists(Genre entity)
         {
@@ -78,7 +39,6 @@ namespace Disney.Infrastructure.Repositories
 
             return response;
         }
-
 
     }
 }

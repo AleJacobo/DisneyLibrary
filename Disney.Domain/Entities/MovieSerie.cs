@@ -1,11 +1,7 @@
 ﻿using Disney.Domain.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Disney.Domain.Entities
 {
@@ -30,6 +26,7 @@ namespace Disney.Domain.Entities
         public virtual Character associatedCharacter { get; set; }
         public virtual Genre associatedGenre { get; set; }
         public bool Status { get; set; }
+
 
     }
 }

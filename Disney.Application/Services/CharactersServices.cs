@@ -5,15 +5,12 @@ using Disney.Domain.DTOs;
 using Disney.Domain.Entities;
 using Disney.Infrastructure.Interfaces;
 using Disney.Infrastructure.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Disney.Application.Services
 {
-    public class CharactersServices : ICharactersService
+    public class CharactersServices : ICharactersServices
     {
         #region Objects and Constructor
         private readonly IMapper mapper;
@@ -59,7 +56,7 @@ namespace Disney.Application.Services
         public Result CreateCharacter(CharacterDTO characterDTO)
         {
             var entity = mapper.Map<Character>(characterDTO);
-            bool confirmation = baseRepository.Exists(entity);
+            bool confirmation = charactersRepository.Exists(entity);
 
             if (confirmation == true)
                 return new Result().Fail($"Ya existe un registro previo de dicho personaje");
@@ -70,7 +67,7 @@ namespace Disney.Application.Services
         public Result UpdateCharacter(CharacterDTO characterDTO)
         {
             var entity = mapper.Map<Character>(characterDTO);
-            var confirmation = baseRepository.Exists(entity);
+            var confirmation = charactersRepository.Exists(entity);
 
             if (confirmation == false)
                 return new Result().NotFound();
@@ -81,7 +78,7 @@ namespace Disney.Application.Services
         public Result DeleteCharacter(CharacterDTO characterDTO)
         {
             var entity = mapper.Map<Character>(characterDTO);
-            var confirmation = baseRepository.Exists(entity);
+            var confirmation = charactersRepository.Exists(entity);
 
             if (confirmation == false)
                 return new Result().NotFound();
